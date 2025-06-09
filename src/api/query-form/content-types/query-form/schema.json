@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "query_forms",
+  "info": {
+    "singularName": "query-form",
+    "pluralName": "query-forms",
+    "displayName": "QueryForm"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "biginteger",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "contactReason": {
+      "type": "text"
+    }
+  }
+}
