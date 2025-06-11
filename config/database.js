@@ -28,6 +28,40 @@
 // });
 
 
+// const parse = require("pg-connection-string").parse;
+
+// module.exports = ({ env }) => {
+//   const config = parse(env("DATABASE_URL"));
+
+//   return {
+//     connection: {
+//       client: "postgres",
+//       connection: {
+//         host: config.host,
+//         port: config.port,
+//         database: config.database,
+//         user: config.user,
+//         password: config.password,
+//         ssl: {
+//           rejectUnauthorized: false,
+//         },
+//         // Add connection timeout and retry settings
+//         acquireConnectionTimeout: 60000,
+//         pool: {
+//           min: 0,
+//           max: 10,
+//           acquireTimeoutMillis: 60000,
+//           createTimeoutMillis: 30000,
+//           destroyTimeoutMillis: 5000,
+//           idleTimeoutMillis: 30000,
+//           reapIntervalMillis: 1000,
+//           createRetryIntervalMillis: 200,
+//         },
+//       },
+//       debug: false,
+//     },
+//   };
+// };
 
 
 const parse = require("pg-connection-string").parse;
@@ -45,10 +79,24 @@ module.exports = ({ env }) => {
         user: config.user,
         password: config.password,
         ssl: {
-          rejectUnauthorized: false, // Required for Supabase
+          rejectUnauthorized: false,
+        },
+        // Force IPv4
+        family: 4,
+        // Add connection timeout and retry settings
+        acquireConnectionTimeout: 60000,
+        pool: {
+          min: 0,
+          max: 10,
+          acquireTimeoutMillis: 60000,
+          createTimeoutMillis: 30000,
+          destroyTimeoutMillis: 5000,
+          idleTimeoutMillis: 30000,
+          reapIntervalMillis: 1000,
+          createRetryIntervalMillis: 200,
         },
       },
-      debug: false,
+      debug: true,
     },
   };
 };
