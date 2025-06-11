@@ -30,7 +30,28 @@
 
 
 
+const parse = require("pg-connection-string").parse;
 
+module.exports = ({ env }) => {
+  const config = parse(env("DATABASE_URL"));
+
+  return {
+    connection: {
+      client: "postgres",
+      connection: {
+        host: config.host,
+        port: config.port,
+        database: config.database,
+        user: config.user,
+        password: config.password,
+        ssl: {
+          rejectUnauthorized: false, // Required for Supabase
+        },
+      },
+      debug: false,
+    },
+  };
+};
 
 
 
@@ -84,12 +105,12 @@
 
 
 
-const path = require('path');
+// const path = require('path');
 
-module.exports = ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
+// module.exports = ({ env }) => {
+//   const client = env('DATABASE_CLIENT', 'sqlite');
 
-  const connections = {
+  // const connections = {
     //   mysql: {
     //     connection: {
     //       host: env('DATABASE_HOST', 'localhost'),
@@ -132,20 +153,20 @@ module.exports = ({ env }) => {
     //     pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
     //   },
 
-    sqlite: {
-      connection: {
-        // filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
-        filename: path.join(__dirname, '..', env('DATABASE_FILENAME', 'tmp/data.db')),
-      },
-      useNullAsDefault: true,
-    },
-  };
+//     sqlite: {
+//       connection: {
+//         // filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
+//         filename: path.join(__dirname, '..', env('DATABASE_FILENAME', 'tmp/data.db')),
+//       },
+//       useNullAsDefault: true,
+//     },
+//   };
 
-  return {
-    connection: {
-      client,
-      ...connections[client],
-      acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
-    },
-  };
-};
+//   return {
+//     connection: {
+//       client,
+//       ...connections[client],
+//       acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
+//     },
+//   };
+// };
