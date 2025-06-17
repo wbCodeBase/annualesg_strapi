@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sectors",
+  "info": {
+    "singularName": "sector",
+    "pluralName": "sectors",
+    "displayName": "Sector"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "description": {
+      "type": "text"
+    },
+    "case_study_we_one_ais": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::case-study-we-one-ai.case-study-we-one-ai",
+      "mappedBy": "sector"
+    }
+  }
+}

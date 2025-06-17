@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_study_we_one_ais",
+  "info": {
+    "singularName": "case-study-we-one-ai",
+    "pluralName": "case-study-we-one-ais",
+    "displayName": "CaseStudy WeOneAi",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "case_study_we_one_ais"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "case_study_we_one_ais"
+    },
+    "caseStudyTitleList": {
+      "type": "richtext"
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.slider",
+        "shared.quote",
+        "shared.media",
+        "shared.rich-text"
+      ]
+    },
+    "sector": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sector.sector",
+      "inversedBy": "case_study_we_one_ais"
+    }
+  }
+}
