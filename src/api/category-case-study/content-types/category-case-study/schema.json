@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category-case-study",
     "pluralName": "category-case-studies",
-    "displayName": "Category CaseStudy",
+    "displayName": "CategoryCaseStudy",
     "description": ""
   },
   "options": {
@@ -21,11 +21,11 @@
     "description": {
       "type": "text"
     },
-    "case_study_we_one_ai": {
+    "case_study_we_one_ais": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::case-study-we-one-ai.case-study-we-one-ai",
-      "inversedBy": "category_case_studies"
+      "mappedBy": "category_case_study"
     }
   }
 }

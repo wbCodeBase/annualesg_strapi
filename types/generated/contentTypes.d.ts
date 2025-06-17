@@ -490,8 +490,8 @@ export interface ApiCaseStudyWeOneAiCaseStudyWeOneAi
       ['shared.slider', 'shared.quote', 'shared.media', 'shared.rich-text']
     >;
     caseStudyTitleList: Schema.Attribute.RichText;
-    category_case_studies: Schema.Attribute.Relation<
-      'oneToMany',
+    category_case_study: Schema.Attribute.Relation<
+      'manyToOne',
       'api::category-case-study.category-case-study'
     >;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -520,7 +520,7 @@ export interface ApiCategoryCaseStudyCategoryCaseStudy
   collectionName: 'category_case_studies';
   info: {
     description: '';
-    displayName: 'Category CaseStudy';
+    displayName: 'CategoryCaseStudy';
     pluralName: 'category-case-studies';
     singularName: 'category-case-study';
   };
@@ -528,8 +528,8 @@ export interface ApiCategoryCaseStudyCategoryCaseStudy
     draftAndPublish: true;
   };
   attributes: {
-    case_study_we_one_ai: Schema.Attribute.Relation<
-      'manyToOne',
+    case_study_we_one_ais: Schema.Attribute.Relation<
+      'oneToMany',
       'api::case-study-we-one-ai.case-study-we-one-ai'
     >;
     createdAt: Schema.Attribute.DateTime;

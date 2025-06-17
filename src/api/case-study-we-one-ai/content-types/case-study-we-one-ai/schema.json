@@ -55,11 +55,11 @@
       "target": "api::sector.sector",
       "inversedBy": "case_study_we_one_ais"
     },
-    "category_case_studies": {
+    "category_case_study": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::category-case-study.category-case-study",
-      "mappedBy": "case_study_we_one_ai"
+      "inversedBy": "case_study_we_one_ais"
     }
   }
 }
