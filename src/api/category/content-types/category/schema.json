@@ -26,12 +26,6 @@
     },
     "description": {
       "type": "text"
-    },
-    "case_study_we_one_ais": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::case-study-we-one-ai.case-study-we-one-ai",
-      "mappedBy": "category"
     }
   }
 }

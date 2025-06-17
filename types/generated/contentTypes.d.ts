@@ -490,12 +490,15 @@ export interface ApiCaseStudyWeOneAiCaseStudyWeOneAi
       ['shared.slider', 'shared.quote', 'shared.media', 'shared.rich-text']
     >;
     caseStudyTitleList: Schema.Attribute.RichText;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    category_case_studies: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category-case-study.category-case-study'
+    >;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -504,8 +507,44 @@ export interface ApiCaseStudyWeOneAiCaseStudyWeOneAi
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sector: Schema.Attribute.Relation<'manyToOne', 'api::sector.sector'>;
-    slug: Schema.Attribute.UID<'Title'>;
-    Title: Schema.Attribute.String;
+    slug: Schema.Attribute.UID;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCaseStudyCategoryCaseStudy
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'category_case_studies';
+  info: {
+    description: '';
+    displayName: 'Category CaseStudy';
+    pluralName: 'category-case-studies';
+    singularName: 'category-case-study';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    case_study_we_one_ai: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::case-study-we-one-ai.case-study-we-one-ai'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category-case-study.category-case-study'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -525,10 +564,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    case_study_we_one_ais: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::case-study-we-one-ai.case-study-we-one-ai'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1158,6 +1193,7 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::case-study-we-one-ai.case-study-we-one-ai': ApiCaseStudyWeOneAiCaseStudyWeOneAi;
+      'api::category-case-study.category-case-study': ApiCategoryCaseStudyCategoryCaseStudy;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::query-form.query-form': ApiQueryFormQueryForm;

@@ -11,15 +11,14 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "text"
     },
     "slug": {
-      "type": "uid",
-      "targetField": "Title"
+      "type": "uid"
     },
     "cover": {
       "type": "media",
@@ -36,12 +35,6 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::author.author",
-      "inversedBy": "case_study_we_one_ais"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
       "inversedBy": "case_study_we_one_ais"
     },
     "caseStudyTitleList": {
@@ -61,6 +54,12 @@
       "relation": "manyToOne",
       "target": "api::sector.sector",
       "inversedBy": "case_study_we_one_ais"
+    },
+    "category_case_studies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category-case-study.category-case-study",
+      "mappedBy": "case_study_we_one_ai"
     }
   }
 }
